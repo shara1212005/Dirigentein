@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Languages - Dirigentein</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(ellipse at center, #00001a 0%, #000000 100%);
+      color: #39ff14;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 30px;
+      text-shadow: 0 0 20px #39ff14;
+    }
+
+    .language-list {
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(10px);
+      border: 2px solid #39ff1444;
+      border-radius: 20px;
+      padding: 25px 50px;
+      box-shadow: 0 0 25px #39ff14aa;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .language-item {
+      background-color: #0d0022cc;
+      border-left: 5px solid #39ff14;
+      padding: 14px 20px;
+      margin: 12px 0;
+      border-radius: 10px;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .language-item:hover {
+      background-color: #16003a;
+      transform: scale(1.03);
+    }
+
+    a.back {
+      margin-top: 30px;
+      color: #39ff14;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    a.back:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Programming Languages</h1>
+
+  <div class="language-list">
+    <div class="language-item">JavaScript</div>
+    <div class="language-item">Python</div>
+    <div class="language-item">Java</div>
+    <div class="language-item">C++</div>
+    <div class="language-item">HTML & CSS</div>
+  </div>
+
+  <a href="index.html" class="back">&#8592; Back to Home</a>
+
+</body>
+</html>

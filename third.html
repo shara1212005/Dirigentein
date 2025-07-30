@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Achievements - Dirigentein</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(ellipse at center, #0f0020 0%, #000000 100%);
+      color: #ff00ff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 30px;
+      text-shadow: 0 0 20px #ff00ff;
+    }
+
+    .achievement-list {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      border: 2px solid #ff00ff44;
+      border-radius: 20px;
+      padding: 20px 40px;
+      box-shadow: 0 0 20px #ff00ff99;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .achievement-item {
+      background-color: #220033aa;
+      border-left: 4px solid #ff00ff;
+      padding: 12px 20px;
+      margin: 10px 0;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+
+    .achievement-item:hover {
+      background-color: #360055;
+      transform: scale(1.02);
+    }
+
+    a.back {
+      margin-top: 30px;
+      color: #ff00ff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    a.back:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Achievements</h1>
+  <div class="achievement-list">
+    <div class="achievement-item">🏆 Completed Full Stack Bootcamp</div>
+    <div class="achievement-item">🚀 Deployed First Web App</div>
+    <div class="achievement-item">💡 Built Personal AI Assistant</div>
+    <div class="achievement-item">🎯 100 Days of Code Completed</div>
+    <div class="achievement-item">🔧 Fixed 500+ Bugs</div>
+  </div>
+
+  <a href="index.html" class="back">&#8592; Back to Home</a>
+
+</body>
+</html>

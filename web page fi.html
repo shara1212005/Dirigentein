@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dirigentein - Homepage</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Share+Tech+Mono&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: 
+        linear-gradient(135deg, #1a0033 0%, #0fffc1 100%),
+        url('https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1500&q=80');
+      background-blend-mode: overlay;
+      background-size: cover;
+      background-position: center;
+      font-family: 'Share Tech Mono', 'Orbitron', Arial, sans-serif;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(circle at 60% 30%, rgba(255, 0, 255, 0.08) 0%, transparent 80%),
+        radial-gradient(circle at 20% 70%, rgba(0,255,255,0.15) 0%, transparent 80%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.03) 0px,
+        rgba(255,255,255,0.03) 1px,
+        transparent 2px,
+        transparent 6px
+      );
+      z-index: 1;
+      pointer-events: none;
+      mix-blend-mode: lighten;
+    }
+
+    h1 {
+      font-family: 'Orbitron', 'Share Tech Mono', Arial, sans-serif;
+      font-size: 3.6rem;
+      margin-bottom: 54px;
+      letter-spacing: 0.18em;
+      text-align: center;
+      z-index: 2;
+      background: 
+        linear-gradient(90deg, #00fff0 0%, #ff00cc 40%, #f0f 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: brightness(1.3) contrast(1.22);
+      text-shadow: 
+        0 0 24px #00fff0, 
+        0 0 32px #ff00cc,
+        2px 2px 32px #110041;
+      border-bottom: 3px dashed #ff00cc77;
+      padding-bottom: 16px;
+      text-transform: uppercase;
+      animation: flicker 2.5s infinite alternate;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; text-shadow: 0 0 24px #00fff0, 0 0 32px #ff00cc, 2px 2px 32px #110041; }
+      10% { opacity: 0.95;}
+      20% { opacity: 0.85;}
+      30% { opacity: 1;}
+      40% { opacity: 0.78;}
+      50% { opacity: 1;}
+      60% { opacity: 0.9;}
+      70% { opacity: 1;}
+      80% { opacity: 0.97;}
+      90% { opacity: 0.85;}
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      z-index: 2;
+      align-items: center;
+      width: 340px;
+      max-width: 90vw;
+    }
+
+    button {
+      width: 100%;
+      min-width: 180px;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: 20px 0;
+      font-size: 1.35rem;
+      font-family: 'Share Tech Mono', 'Orbitron', Arial, sans-serif;
+      border: 2.5px solid #0fffc1;
+      border-radius: 18px;
+      background: 
+        linear-gradient(90deg, rgba(0,255,255,0.19) 0%, rgba(255,0,204,0.21) 100%),
+        linear-gradient(270deg, #0fffc1 30%, #ff00cc 70%);
+      color: #fff;
+      box-shadow: 
+        0 0 16px #00fff077, 
+        0 0 6px #ff00cc99, 
+        0 0 24px #2c0050 inset;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: 
+        transform 0.17s cubic-bezier(0.4,2,0.6,1), 
+        box-shadow 0.17s, 
+        border-color 0.17s,
+        background 0.19s;
+      outline: none;
+      letter-spacing: 0.05em;
+      text-shadow: 0 2px 18px #0fffc1bb, 0 0 2px #ff00cc;
+      backdrop-filter: blur(2px);
+      display: block;
+    }
+
+    button:before {
+      content: '';
+      position: absolute;
+      top: -40%; left: -40%; right: -40%; bottom: -40%;
+      background: conic-gradient(from 180deg at 50% 50%, #00fff0 0deg, #ff00cc 180deg, #00fff0 360deg);
+      filter: blur(32px);
+      opacity: 0.22;
+      z-index: -1;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    button:hover, button:focus {
+      transform: scale(1.11) rotate(-1deg);
+      border-color: #ff00cc;
+      background:
+        linear-gradient(90deg, rgba(255,0,204,0.33) 0%, rgba(0,255,255,0.39) 100%),
+        linear-gradient(270deg, #ff00cc 30%, #0fffc1 70%);
+      box-shadow: 0 0 42px #ff00ccbb, 0 0 12px #0ff8, 0 0 28px #2c0050cc inset;
+      color: #fff;
+      text-shadow: 0 0 20px #ff00cc, 0 0 8px #0fffc1;
+    }
+
+    button:active {
+      filter: brightness(0.92) contrast(1.15);
+    }
+
+    button::after {
+      content: '';
+      position: absolute;
+      top: 4px; left: 6px; right: 6px; bottom: 4px;
+      border-radius: 11px;
+      border: 1.5px dashed #0fffc1;
+      opacity: 0.26;
+      pointer-events: none;
+      z-index: 2;
+      filter: blur(1.5px);
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+    button:hover::after, button:focus::after {
+      border-color: #ff00cc;
+      opacity: 0.42;
+    }
+
+    .circuit {
+      position: absolute;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.19;
+      mix-blend-mode: lighten;
+    }
+    .circuit1 { top: 2vw; left: 8vw; width: 120px;}
+    .circuit2 { bottom: 7vw; right: 10vw; width: 160px;}
+    .circuit3 { top: 80vh; left: 60vw; width: 60px; opacity: 0.11;}
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .buttons {
+        width: 98vw;
+        max-width: 98vw;
+      }
+      button {
+        font-size: 1rem;
+        padding: 14px 0;
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Dirigentein</h1>
+  <div class="buttons">
+    <button onclick="window.location.href='https://shara1212005.github.io/my-website/first%20ranker.html'">Rank</button>
+    <button onclick="window.location.href='https://shara1212005.github.io/my-websit-/second%20lamg.html'">Language</button>
+    <button onclick="window.location.href='https://shara1212005.github.io/my-website-/third.html'">Achievement</button>
+    <button onclick="window.location.href='https://shara1212005.github.io/my-websit-shara/four%20web%20expent.html'">Experience</button>
+  </div>
+  <img src="https://svgshare.com/i/13yK.svg" class="circuit circuit1" alt="Circuit" />
+  <img src="https://svgshare.com/i/13yK.svg" class="circuit circuit2" alt="Circuit" />
+  <img src="https://svgshare.com/i/13yK.svg" class="circuit circuit3" alt="Circuit" />
+</body>
+</html>

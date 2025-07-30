@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rank - Dirigentein</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(ellipse at center, #1a0023 0%, #000000 100%);
+      color: #00ffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 30px;
+      text-shadow: 0 0 20px #00ffff;
+    }
+
+    .rank-list {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+      border: 2px solid #00ffff44;
+      border-radius: 20px;
+      padding: 20px 40px;
+      box-shadow: 0 0 20px #00ffff88;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .rank-item {
+      background-color: #120020aa;
+      border-left: 4px solid #00ffff;
+      padding: 12px 20px;
+      margin: 10px 0;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+
+    .rank-item:hover {
+      background-color: #1e0044;
+      transform: scale(1.02);
+    }
+
+    a.back {
+      margin-top: 30px;
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    a.back:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Top Ranks</h1>
+  <div class="rank-list">
+    <div class="rank-item">1. Alice - 9800</div>
+    <div class="rank-item">2. Bob - 8700</div>
+    <div class="rank-item">3. Charlie - 8600</div>
+    <div class="rank-item">4. Diana - 8400</div>
+    <div class="rank-item">5. Ethan - 8200</div>
+  </div>
+
+  <a href="index.html" class="back">&#8592; Back to Home</a>
+
+</body>
+</html>
