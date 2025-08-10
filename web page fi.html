@@ -203,6 +203,34 @@
         min-width: 0;
       }
     }
+
+    /* Chat button styles */
+    .message-btn {
+      position: fixed;
+      left: 18px;
+      bottom: 24px;
+      background: linear-gradient(135deg, #0fffc1, #ff00cc);
+      color: white;
+      padding: 12px;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #0fffc1, 0 0 18px #ff00cc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      text-decoration: none;
+      z-index: 999;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .message-btn:hover {
+      transform: scale(1.15) rotate(5deg);
+      box-shadow: 0 0 20px #ff00cc, 0 0 25px #0fffc1;
+    }
+
+    .message-btn svg {
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -216,5 +244,12 @@
   <img src="https://svgshare.com/i/13yK.svg" class="circuit circuit1" alt="Circuit" />
   <img src="https://svgshare.com/i/13yK.svg" class="circuit circuit2" alt="Circuit" />
   <img src="https://svgshare.com/i/13yK.svg" class="circuit circuit3" alt="Circuit" />
+
+  <!-- Chat Button -->
+  <a href="https://shara1212005.github.io/Dirigentein/chat.html" class="message-btn" title="Open Chat">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28px" height="28px">
+      <path d="M20 2H4C2.9 2 2 .9 2 2v20l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 4H6v-2h8v2zm4-6H6V5h12v2z"/>
+    </svg>
+  </a>
 </body>
 </html>
