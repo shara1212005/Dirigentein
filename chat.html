@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dirigentein - Chat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent-1: #00fff0;
+      --accent-2: #ff00cc;
+      --glass: rgba(255,255,255,0.05);
+      --glass-2: rgba(255,255,255,0.03);
+      --bg-grad: linear-gradient(135deg, #1a0033 0%, #0fffc1 100%);
+    }
+    html,body{height:100%;}
+    body{
+      margin:0; padding:20px; box-sizing:border-box;
+      font-family:'Share Tech Mono', 'Orbitron', Arial, sans-serif;
+      background: var(--bg-grad), url('https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1500&q=80');
+      background-blend-mode: overlay; background-size:cover; background-position:center;
+      color:#fff; display:flex; align-items:center; justify-content:center;
+    }
+
+    .app {
+      width:100%; max-width:980px; height:86vh; min-height:560px;
+      border-radius:20px; position:relative; overflow:hidden; z-index:2;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      background: linear-gradient(180deg, rgba(12,2,34,0.55), rgba(10,4,20,0.65));
+      border: 1px solid rgba(255,255,255,0.06);
+      display:grid; grid-template-columns:320px 1fr;
+    }
+
+    /* Sidebar */
+    .sidebar{
+      padding:20px; box-sizing:border-box; display:flex; flex-direction:column; gap:18px;
+      backdrop-filter: blur(6px);
+      border-right:1px solid rgba(255,255,255,0.03);
+    }
+
+    .brand{ text-align:center; }
+    .brand h2{ margin:0; font-size:1.1rem; letter-spacing:0.14em; color:transparent;
+      -webkit-background-clip:text; background: linear-gradient(90deg,var(--accent-1),var(--accent-2));}
+
+    .chats{
+      flex:1; overflow:auto; display:flex; flex-direction:column; gap:10px; padding-right:6px;
+    }
+
+    .chat-item{ display:flex; gap:12px; align-items:center; padding:8px; border-radius:10px; cursor:pointer; transition:background .15s; }
+    .chat-item:hover{ background: rgba(255,255,255,0.02); }
+    .avatar{ width:44px; height:44px; border-radius:10px; background:linear-gradient(45deg,var(--accent-1),var(--accent-2)); display:flex; align-items:center; justify-content:center; color:#0b0120; font-weight:700; }
+    .meta{ flex:1; }
+    .meta .name{ font-weight:700; font-size:0.95rem; }
+    .meta .preview{ font-size:0.78rem; opacity:0.7; margin-top:4px; }
+
+    .controls{ display:flex; gap:8px; align-items:center; }
+    .btn{ padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.04); background:var(--glass); cursor:pointer; font-size:0.85rem; }
+    .home-link{ text-decoration:none; color:inherit; font-size:0.82rem; opacity:0.9; }
+
+    /* Main chat */
+    .main{
+      display:flex; flex-direction:column; gap:12px; padding:22px; box-sizing:border-box;
+    }
+
+    .header{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; padding-bottom:6px; border-bottom:1px dashed rgba(255,255,255,0.04);
+    }
+    .header-left{ display:flex; align-items:center; gap:12px; }
+    .title{ font-size:1.05rem; letter-spacing:0.12em; }
+    .sub{ font-size:0.77rem; opacity:0.7; }
+
+    .messages{
+      flex:1; overflow:auto; padding:18px; display:flex; flex-direction:column; gap:12px; scroll-behavior:smooth;
+      background-image: repeating-linear-gradient(to bottom, rgba(255,255,255,0.01) 0 1px, transparent 1px 28px);
+      border-radius:12px; margin-top:6px;
+    }
+
+    .msg{ max-width:72%; padding:12px 14px; border-radius:12px; box-shadow: 0 6px 18px rgba(0,0,0,0.5); font-size:0.95rem; line-height:1.25; }
+    .msg.me{ margin-left:auto; background: linear-gradient(180deg, rgba(0,255,240,0.12), rgba(255,0,204,0.12)); border:1px solid rgba(0,255,240,0.14); }
+    .msg.them{ margin-right:auto; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); }
+    .time{ display:block; font-size:0.68rem; opacity:0.6; margin-top:8px; }
+
+    .typing{ font-size:0.85rem; opacity:0.8; display:flex; gap:8px; align-items:center; }
+    .dots{ width:8px; height:8px; border-radius:99px; background:var(--accent-1); animation: blink 1s infinite; }
+    .dots:nth-child(2){ animation-delay: .17s }
+    .dots:nth-child(3){ animation-delay: .34s }
+    @keyframes blink{ 0%{opacity:0.2}50%{opacity:1}100%{opacity:0.2} }
+
+    .composer{ display:flex; gap:10px; align-items:center; padding:12px; border-radius:12px; background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); }
+    .input{ flex:1; background:transparent; border:none; outline:none; color:inherit; font-size:1rem; font-family:inherit; padding:8px 10px; }
+    .send{ padding:10px 14px; border-radius:10px; background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); color:#0b0120; font-weight:700; border:none; cursor:pointer; }
+
+    /* small screens */
+    @media (max-width:860px){
+      .app{ grid-template-columns: 1fr; height:92vh; }
+      .sidebar{ order:2; flex-direction:row; gap:10px; overflow-x:auto; padding:12px; }
+      .chats{ flex-direction:row; gap:8px; }
+      .chat-item{ min-width:120px; flex-direction:column; align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app" role="application">
+    <aside class="sidebar">
+      <div class="brand">
+        <h2>Dirigentein</h2>
+        <div style="font-size:0.7rem; opacity:0.7; margin-top:6px;">Messaging</div>
+      </div>
+
+      <div class="chats" id="chatList" aria-label="Conversations">
+        <!-- JS will populate -->
+      </div>
+
+      <div class="controls">
+        <a class="home-link btn" href="https://shara1212005.github.io/my-websit-first/web%20page%20fi.html" title="Back to home">Back to Home</a>
+        <button class="btn" id="newConvBtn">New</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="header">
+        <div class="header-left">
+          <div class="avatar" id="activeAvatar">A</div>
+          <div>
+            <div class="title" id="activeTitle">Welcome</div>
+            <div class="sub" id="activeSub">Select a conversation or start a new chat</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <div style="font-size:0.82rem; opacity:0.75">Status: <strong id="statusText">online</strong></div>
+        </div>
+      </div>
+
+      <div class="messages" id="messages" aria-live="polite">
+        <!-- messages will appear here -->
+      </div>
+
+      <div class="composer" role="form" aria-label="Message composer">
+        <input id="messageInput" class="input" placeholder="Type a message — press Enter to send" aria-label="Message input">
+        <button id="sendBtn" class="send">Send</button>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Basic demo chat app (no server) — stores conversations in localStorage
+    const DEFAULTS = {
+      conversations: [
+        {id:'alice', name:'Alice', preview:'Hey — wanna try the new map?', messages:[{from:'them', text:'Hey, are you coming tonight?', t:Date.now()-1000*60*60}]},
+        {id:'bob', name:'Bob', preview:'Sent a file', messages:[{from:'me', text:'Check this out!', t:Date.now()-1000*60*10}]}
+      ]
+    };
+
+    const $ = id=>document.getElementById(id);
+    let store = JSON.parse(localStorage.getItem('dirig_chat_v1') || 'null');
+    if(!store){ store = DEFAULTS; localStorage.setItem('dirig_chat_v1', JSON.stringify(store)); }
+
+    let activeConv = null;
+
+    function save(){ localStorage.setItem('dirig_chat_v1', JSON.stringify(store)); }
+
+    function renderChatList(){
+      const container = $('chatList'); container.innerHTML='';
+      store.conversations.forEach(conv=>{
+        const el = document.createElement('div'); el.className='chat-item'; el.tabIndex=0;
+        el.innerHTML = `<div class="avatar">${conv.name.charAt(0)}</div><div class="meta"><div class="name">${conv.name}</div><div class="preview">${conv.preview||''}</div></div>`;
+        el.onclick = ()=>{ openConversation(conv.id); };
+        container.appendChild(el);
+      });
+    }
+
+    function openConversation(id){
+      activeConv = store.conversations.find(c=>c.id===id);
+      if(!activeConv) return;
+      $('activeAvatar').textContent = activeConv.name.charAt(0);
+      $('activeTitle').textContent = activeConv.name;
+      $('activeSub').textContent = activeConv.preview || 'Chat started';
+      renderMessages();
+    }
+
+    function renderMessages(){
+      const m = $('messages'); m.innerHTML='';
+      if(!activeConv){ m.innerHTML = `<div style="opacity:.8">No conversation selected.</div>`; return; }
+      activeConv.messages.forEach(msg=>{
+        const d = document.createElement('div'); d.className='msg '+(msg.from==='me'?'me':'them');
+        d.innerHTML = `<div>${escapeHtml(msg.text)}</div><span class="time">${formatTime(msg.t)}</span>`;
+        m.appendChild(d);
+      });
+      m.scrollTop = m.scrollHeight;
+    }
+
+    function formatTime(ts){ const d=new Date(ts); return d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
+
+    function sendMessage(text){ if(!activeConv) { createConversation('You'); }
+      const msg = {from:'me', text, t:Date.now()}; activeConv.messages.push(msg); activeConv.preview = text; save(); renderChatList(); renderMessages(); simulateReply(activeConv);
+    }
+
+    function simulateReply(conv){
+      // small fake reply to demonstrate
+      setTimeout(()=>{
+        conv.messages.push({from:'them', text:'Nice — got it!', t:Date.now()});
+        conv.preview = 'Nice — got it!'; save(); renderChatList(); renderMessages();
+      }, 1100 + Math.random()*1200);
+    }
+
+    function createConversation(name){
+      const id = name.toLowerCase().replace(/[^a-z0-9]+/g,'') + Date.now().toString(36).slice(-4);
+      const conv = {id, name, preview:'', messages:[]}; store.conversations.unshift(conv); save(); renderChatList(); openConversation(id);
+    }
+
+    // small helpers
+    function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    // events
+    $('sendBtn').addEventListener('click', ()=>{ const txt=$('messageInput').value.trim(); if(!txt) return; sendMessage(txt); $('messageInput').value=''; });
+    $('messageInput').addEventListener('keydown', (e)=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); $('sendBtn').click(); } });
+    $('newConvBtn').addEventListener('click', ()=>{ const name = prompt('New conversation name:','Friend'); if(name) createConversation(name); });
+
+    // initial render
+    renderChatList(); openConversation(store.conversations[0].id);
+
+    // accessibility: focus outline for keyboard users
+    document.addEventListener('keyup', (e)=>{ if(e.key==='/' ){ $('messageInput').focus(); e.preventDefault(); } });
+
+  </script>
+</body>
+</html>
